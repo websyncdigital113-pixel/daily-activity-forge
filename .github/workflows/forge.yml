@@ -2,15 +2,10 @@ name: Activity Forge
 
 on:
   schedule:
-    # Every 3 hours, all day every day
-    - cron: '0 0 * * *'
-    - cron: '0 3 * * *'
-    - cron: '0 6 * * *'
-    - cron: '0 9 * * *'
-    - cron: '0 12 * * *'
-    - cron: '0 15 * * *'
-    - cron: '0 18 * * *'
-    - cron: '0 21 * * *'
+    # Every 40 minutes (36 runs per day = ~21 commits/day)
+    - cron: '0 * * * *'
+    - cron: '40 * * * *'
+    - cron: '20 * * * *'
   workflow_dispatch:  # manual trigger for testing
 
 jobs:
@@ -43,13 +38,13 @@ jobs:
           git config user.email "nworahebuka.a@gmail.com"
           git add -A
           HOUR=$(date -u +%H)
+          MIN=$(date -u +%M)
           DATE=$(date -u +%Y-%m-%d)
           # pick a commit prefix that looks like real dev work
-          case $HOUR in
-            0|3|6|9)   PREFIX="docs: add TIL entry" ;;
-            12|15)     PREFIX="feat: add algorithm snippet" ;;
-            18|21)     PREFIX="chore: devlog update" ;;
-            *)         PREFIX="chore: cycle update" ;;
+          case $MIN in
+            0)         PREFIX="docs: add TIL entry" ;;
+            20)        PREFIX="feat: add algorithm snippet" ;;
+            40)        PREFIX="chore: devlog update" ;;
           esac
           git diff --cached --quiet || git commit -m "${PREFIX} ${DATE} $(date -u +%H:%M)"
 
