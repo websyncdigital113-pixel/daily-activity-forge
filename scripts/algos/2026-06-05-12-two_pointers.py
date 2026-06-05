@@ -1,6 +1,6 @@
 """
 Two Pointers — Pair Sum
-Generated: 2026-06-05 12:20 UTC
+Generated: 2026-06-05 12:43 UTC
 """
 
 def pair_sum(arr: list, target: int) -> tuple | None:
