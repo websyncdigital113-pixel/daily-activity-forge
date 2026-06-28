@@ -1,6 +1,6 @@
 """
 0/1 Knapsack (DP)
-Generated: 2026-06-28 15:19 UTC
+Generated: 2026-06-28 15:53 UTC
 """
 
 def knapsack(weights: list, values: list, capacity: int) -> int:
